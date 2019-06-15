@@ -1,3 +1,15 @@
+import * as contentful from 'contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+
+const client = contentful.createClient({
+  space: '<space_id>',
+  environment: '<environment_id>', // defaults to 'master' if not set
+  accessToken: '<content_delivery_api_key>'
+});
+
+client.getEntry('<entry_id>'); // asynchronous, returns promise
+
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Haezl`,
@@ -105,6 +117,14 @@ module.exports = {
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `tui7p17eow9m`,
+        accessToken: `197aQQbh1LKOLyqwVi62Nd3VGWmzoxVGELWZksG8NjY`,
+      }
+    },
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
@@ -112,6 +132,7 @@ module.exports = {
           primaryColor: "#0c9ed1",
         },
       },
+      
     },
   ],
   pathPrefix: "/img",

@@ -39,19 +39,11 @@ export default ({ data }: IBlogPost) => {
 
 export const query = graphql`
   query($slug: String!, $coverImageMaxWidth: Int!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      frontmatter {
-        title
-        cover {
-          childImageSharp {
-            ... on ImageSharp {
-              fluid(maxWidth: $coverImageMaxWidth) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
+    contentfulPost( slug: { eq: $slug } ) {
+      title
+      author
+      content {
+        child
       }
     }
   }
